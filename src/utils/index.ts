@@ -18,3 +18,18 @@ export const formatDiscountedAmount = (amount: string, rate: number) => {
   const p: string = String(price);
   return formatAmount(p);
 };
+
+export const getTotal = (arr: any[]) => {
+  const amount = arr.reduce((acc, curr) => {
+    let total = acc;
+    if (curr.payedDate) return total;
+    if (curr.discount) {
+      total +=
+        Number(curr.amount) - Number(curr.amount) * (curr.discount.rate / 100);
+    } else {
+      total += Number(curr.amount);
+    }
+    return total;
+  }, 0);
+  return formatAmount(String(amount));
+};
