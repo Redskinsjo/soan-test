@@ -11,10 +11,6 @@ export default {
     borderRadius: 5,
     padding: "60px 50px",
   },
-  firstTabContent: {
-    display: "flex",
-    flexDirection: "column",
-  },
   checkbox: {
     fontSize: 22,
   },

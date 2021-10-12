@@ -43,6 +43,7 @@ function App() {
   >();
   const [error, setError] = useState<Error | undefined>();
   const [displayModal, setDisplayModal] = useState<boolean | undefined>();
+  const [loading, setLoading] = useState<boolean | undefined>(true);
 
   // get invoices or set error in case
   const fetchData = async () => {
@@ -61,6 +62,7 @@ function App() {
         }
         setPayedInvoices(payed);
         setNotPayedInvoices(notPayed);
+        setLoading(false);
       } else {
         setError({ type: "no-data" });
       }
@@ -84,19 +86,19 @@ function App() {
           <ModalApp
             displayModal={displayModal}
             notPayedInvoices={notPayedInvoices}
-          />{" "}
+          />
         </div>
       )}
 
-      {!error && (
+      {!error && !loading && (
         <div style={styles.appContent as styles}>
           <div className="container">
-            <Tabs type="card" style={styles.tabsContainer as styles}>
-              <TabPane
-                tab="Factures à payer"
-                style={styles.firstTabContent as styles}
-                key="1"
-              >
+            <Tabs
+              type="card"
+              style={styles.tabsContainer as styles}
+              onTabClick={(key: string) => console.log(key)}
+            >
+              <TabPane tab="Factures à payer" key="1">
                 {notPayedInvoices?.map((inv) => (
                   <InvoicePayment key={id()} inv={inv} type="not-payed" />
                 ))}
