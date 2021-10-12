@@ -20,6 +20,14 @@ function PaymentMethod({ discount, multi }: IPaymentMethod) {
             style={styles.notPayedInv_3_2 as TStyles}
           >{`-${discount.rate}% pendant ${discount.maxDaysToPay} jours`}</div>
         </div>
+      ) : multi === "USED" && discount ? (
+        <div style={styles.notPayedInv_3 as TStyles}>
+          <div style={styles.notPayedInv_3_1 as TStyles}>
+            <BsLightningChargeFill />
+            <span style={{ color: "black", marginLeft: 6 }}>Escompte</span>
+          </div>
+          <div style={styles.notPayedInv_3_2 as TStyles}>Appliqué</div>
+        </div>
       ) : multi === "USED" && !discount ? (
         <div style={styles.notPayedInv_3 as TStyles}>
           <div style={styles.notPayedInv_3_1 as TStyles}>
